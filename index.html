@@ -42,26 +42,52 @@
 
         // Setup Global Variables
         var searchLimit = 8;
-        var searchResult = "Transformer";
-        var searchGiphy = "http://api.giphy.com/v1/gifs/search?q=" + searchResult +
-            "&api_key=EL0x22eZIsaBOefGty0lhD4CLRXzPWjA&limit=" + searchLimit;
-        var imagesGalleryStorage = [];
+        var searchResult = "";
+        var searchGiphy = "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5";
 
         $('#search_Giphy').on('keydown', function (e) {
             // only trigger search when user press down enter
             if (e.which == '13') {
-                console.log("enter has been pressed");
+                searchResult = $('#search_Giphy').val();
+                searchGiphy = "http://api.giphy.com/v1/gifs/search?q=" + searchResult + "&api_key=EL0x22eZIsaBOefGty0lhD4CLRXzPWjA&limit=" + searchLimit;
+                console.log(searchGiphy, "searchGiphy url");
+                search_Giphy_results();
+                // console.log(searchResult, "what is search result");
+                // console.log("enter has been pressed");
             }
         });
 
-        var xhr = $.get(
-            searchGiphy);
-        xhr.done(function (data) {
-            console.log("success got data", data);
-            console.log(data.data, "data-images")
-            console.log((data.data[0]), "data-images-accessing")
-            console.log((data.data[0].embed_url), "data-images-accessing-embed_url")
-        });
+        function search_Giphy_results() {
+
+            var jqxhr = $.get(searchGiphy, function (data) {
+                    console.log("success");
+                })
+                .done(function (data) {
+                    // console.log("second success");
+                    // console.log("success got data", data);
+                    // console.log(data.data, "data-images")
+                    // console.log((data.data[0]), "data-images-accessing")
+                    // console.log((data.data[0].embed_url), "data-images-accessing-embed_url")
+
+                    // need to do a for loop and append the data
+                    for (i = 0; i < data.data.length; i++) {
+                        // console.log(data.data[i], "what is data i");
+                        console.log(data.data[i].embed_url, "what is data i embed url");
+                    }
+                })
+                .fail(function () {
+                    console.log("error");
+                })
+                .always(function () {
+                    console.log("finished");
+                });
+            // Perform other work here ...
+
+            // Set another completion function for the request above
+            jqxhr.always(function () {
+                console.log("second finished");
+            });
+        }
     </script>
 </body>
 
