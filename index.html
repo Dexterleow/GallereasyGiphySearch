@@ -16,14 +16,17 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+    <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 
 <body>
     <h1 class="text-center">GallereasyGiphySearch</h1>
 
     <div id="gallery">
-        <iframe src="https://giphy.com/embed/7c0bE2bfJrfos" width="480" height="270" frameBorder="0" class="giphy-embed"
-            allowFullScreen></iframe>
+        <div class="gallery_images">
+            <iframe src="https://giphy.com/embed/7c0bE2bfJrfos" width="480" height="270" frameBorder="0" class="giphy-embed"
+                allowFullScreen></iframe>
+        </div>
     </div>
 
     <!-- jQuery -->
@@ -34,8 +37,10 @@
         //javascript, jQuery
 
         // Setup Global Variables
-        var searchGiphy =
-            "http://api.giphy.com/v1/gifs/search?q=transformers&api_key=EL0x22eZIsaBOefGty0lhD4CLRXzPWjA&limit=5";
+        var searchLimit = 8;
+        var searchResult = "Transformer";
+        var searchGiphy = "http://api.giphy.com/v1/gifs/search?q=" + searchResult + "&api_key=EL0x22eZIsaBOefGty0lhD4CLRXzPWjA&limit=" + searchLimit;
+        var imagesGalleryStorage = [];
 
         var xhr = $.get(
             searchGiphy);

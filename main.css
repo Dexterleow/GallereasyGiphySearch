@@ -1,0 +1,9 @@
+
+ /* without stretching the image */
+.consistentImageWidth {
+    width: 100px
+}
+
+.consistentImageHeight {
+    height: 200px;
+}
