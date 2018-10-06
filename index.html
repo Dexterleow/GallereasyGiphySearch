@@ -22,10 +22,14 @@
 <body>
     <h1 class="text-center">GallereasyGiphySearch</h1>
 
+    <!-- Search form -->
+    <div class="col-xs-3 active-search">
+        <input class="form-control" type="text" placeholder="Start searching for images!" aria-label="Search" id="search_Giphy">
+    </div>
+
     <div id="gallery">
         <div class="gallery_images">
-            <iframe src="https://giphy.com/embed/7c0bE2bfJrfos" width="480" height="270" frameBorder="0" class="giphy-embed"
-                allowFullScreen></iframe>
+            <iframe src="https://giphy.com/embed/7c0bE2bfJrfos" width="480" height="270" frameBorder="0" class="giphy-embed"></iframe>
         </div>
     </div>
 
@@ -39,8 +43,16 @@
         // Setup Global Variables
         var searchLimit = 8;
         var searchResult = "Transformer";
-        var searchGiphy = "http://api.giphy.com/v1/gifs/search?q=" + searchResult + "&api_key=EL0x22eZIsaBOefGty0lhD4CLRXzPWjA&limit=" + searchLimit;
+        var searchGiphy = "http://api.giphy.com/v1/gifs/search?q=" + searchResult +
+            "&api_key=EL0x22eZIsaBOefGty0lhD4CLRXzPWjA&limit=" + searchLimit;
         var imagesGalleryStorage = [];
+
+        $('#search_Giphy').on('keydown', function (e) {
+            // only trigger search when user press down enter
+            if (e.which == '13') {
+                console.log("enter has been pressed");
+            }
+        });
 
         var xhr = $.get(
             searchGiphy);
