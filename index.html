@@ -42,6 +42,7 @@
         //javascript, jQuery
 
         // Setup Global Variables
+        var searchCounter = 0;
         var searchLimit = 8;
         var searchResult = "";
         var searchGiphy = "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5";
@@ -52,8 +53,6 @@
             // only trigger search when user press down enter
             if (e.which == '13') {
                 searchResult = $('#search_Giphy').val();
-                searchGiphy = "http://api.giphy.com/v1/gifs/search?q=" + searchResult +
-                    "&api_key=EL0x22eZIsaBOefGty0lhD4CLRXzPWjA&limit=" + searchLimit;
                 console.log(searchGiphy, "searchGiphy url");
                 search_Giphy_results();
                 // console.log(searchResult, "what is search result");
@@ -65,7 +64,14 @@
 
             if (newSearchState) {
                 $("#gallery").empty();
+                searchCounter = 0;
+                searchLimit = 8;
+            } else {
+                searchLimit = searchLimit + 8;
             }
+
+            searchGiphy = "http://api.giphy.com/v1/gifs/search?q=" + searchResult +
+                "&api_key=EL0x22eZIsaBOefGty0lhD4CLRXzPWjA&limit=" + searchLimit;
 
             var jqxhr = $.get(searchGiphy, function (data) {
                     console.log("success");
@@ -74,16 +80,36 @@
                     // console.log("second success");
                     // console.log("success got data", data);
 
+                    // console.log(searchCounter, "search counter");
+                    // console.log(searchLimit, "search Limit");
+                    // console.log(data, "data");
+
                     // need to do a for loop and append the data
-                    for (i = 0; i < data.data.length; i++) {
-                        $("#gallery").append("<iframe id=" + i + " class=\"gallery_images\" src=" + data.data[i].embed_url +
+                    for (searchCounter; searchCounter < searchLimit; searchCounter++) {
+                        console.log(searchCounter, "searchCounter value inside the for loop");
+                        console.log(searchLimit, "searchLimit value inside the for loop");
+
+                        if (typeof data.data[searchCounter] == 'undefined') {
+                            if (searchCounter === 0) {
+                                $("#gallery").append("No Results");
+                            } else {
+                                $("#gallery").append("No More Results");
+                            }
+                            console.log("no more results");
+
+                            break;
+                        }
+
+                        $("#gallery").append("<iframe id=" + searchCounter + " class=\"gallery_images\" src=" +
+                            data.data[searchCounter].embed_url +
                             ">" + "</iframe>");
-                        console.log(data.data[i].embed_url, "what is data i embed url");
+
+                        console.log(data.data[searchCounter].embed_url, "what is data i embed url");
                     }
 
                     // append fetch more button
                     if (newSearchState && fetchMoreButton) {
-                        console.log(fetchMoreButton ,"fetch more button");
+                        console.log(fetchMoreButton, "fetch more button");
                         var r = $('<input/>').attr({
                             type: "button",
                             id: "field",
