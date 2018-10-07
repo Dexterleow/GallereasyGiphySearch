@@ -52,14 +52,13 @@
         var searchGiphy = "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5";
         var newSearchState = true;
         var fetchMoreButton = true;
+        var favouriteImages = [];
 
         $('#search_Giphy').on('keydown', function (e) {
             // only trigger search when user press down enter
             if (e.which == '13') {
                 searchResult = $('#search_Giphy').val();
-                console.log(searchGiphy, "searchGiphy url");
                 search_Giphy_results();
-                // console.log(searchResult, "what is search result");
             }
         });
 
@@ -90,21 +89,18 @@
                             } else {
                                 $("#gallery").append("No More Results");
                             }
-                            // console.log("no more results");
                             break;
                         }
 
-                        $("#gallery").append("<div" + " class=\"gallery_images_container\" " + ">" + "<iframe id=" + searchCounter +
+                        $("#gallery").append("<div" + " class=\"gallery_images_container\" " + ">" + "<iframe id=" +
+                            searchCounter +
                             " class=\"gallery_images col-xs-12 col-sm-3\" src=" +
                             data.data[searchCounter].embed_url + ">" + "</iframe>" + "</div>");
-
-                        // console.log(data.data[searchCounter].embed_url, "what is data i embed url");
-                        // + "<div" + " class=\"gallery_images_heart\" " + ">" + "</div>" +
                     }
 
                     // append fetch more button
                     if (newSearchState && fetchMoreButton) {
-                        console.log(fetchMoreButton, "fetch more button");
+                        // console.log(fetchMoreButton, "fetch more button");
                         var r = $('<input/>').attr({
                             type: "button",
                             id: "field",
@@ -130,11 +126,26 @@
 
                 $('.gallery_images').hover(function () {
                     $(this).after(' <img src="images/heart_icon.jpg" id="heart_icon_image" />');
+
+                    $(this).attr("src", function (index, attr) {
+                        favouriteImages.push($(this).attr("src"));
+                        console.log($(this).attr("src"));
+                        console.log(favouriteImages)
+                    });
+
                 }, function () {
                     $('#heart_icon_image').remove();
                 });
 
-                console.log("hoverrr");
+                // $('.gallery_images').click(function () {
+                //     e.stopPropagation();
+                //     event.preventDefault();
+                //     $(this).attr("src", function (index, attr) {
+                //         favouriteImages.push($(this).attr("src"));
+                //         console.log($(this).attr("src"));
+                //     });
+                // });
+
                 console.log("second finished");
             });
         }
