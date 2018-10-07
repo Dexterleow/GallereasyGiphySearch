@@ -20,18 +20,23 @@
 </head>
 
 <body>
-    <h1 class="text-center">GallereasyGiphySearch</h1>
 
-    <!-- Search form -->
-    <div class="row active-search">
-        <div class="col-xs-offset-4 col-xs-4">
-            <input class="form-control" type="text" placeholder="Start searching for images!" aria-label="Search" id="search_Giphy">
+    <div class="container">
+        <h1 class="text-center">GallereasyGiphySearch</h1>
+
+        <!-- Search form -->
+        <div class="row active-search">
+            <div class="col-xs-offset-4 col-xs-4">
+                <input class="form-control" type="text" placeholder="Start searching for images!" aria-label="Search"
+                    id="search_Giphy">
+            </div>
         </div>
-    </div>
 
-    <div id="gallery">
-    </div>
-    <div id="gallery_moreImages">
+        <div id="gallery" class="row">
+        </div>
+
+        <div id="gallery_moreImages" class="row text-center">
+        </div>
     </div>
 
     <!-- jQuery -->
@@ -56,7 +61,6 @@
                 console.log(searchGiphy, "searchGiphy url");
                 search_Giphy_results();
                 // console.log(searchResult, "what is search result");
-                // console.log("enter has been pressed");
             }
         });
 
@@ -74,16 +78,15 @@
                 "&api_key=EL0x22eZIsaBOefGty0lhD4CLRXzPWjA&limit=" + searchLimit;
 
             var jqxhr = $.get(searchGiphy, function (data) {
+                    $("#gallery").append("Loading ...");
                     console.log("success");
                 })
                 .done(function (data) {
-                    // console.log("second success");
-                    // console.log("success got data", data);
-
+                    $("#gallery").empty();
                     // console.log(searchCounter, "search counter");
                     // console.log(searchLimit, "search Limit");
                     // console.log(data, "data");
-
+                    
                     // need to do a for loop and append the data
                     for (searchCounter; searchCounter < searchLimit; searchCounter++) {
                         console.log(searchCounter, "searchCounter value inside the for loop");
@@ -96,13 +99,12 @@
                                 $("#gallery").append("No More Results");
                             }
                             console.log("no more results");
-
                             break;
                         }
 
-                        $("#gallery").append("<iframe id=" + searchCounter + " class=\"gallery_images\" src=" +
-                            data.data[searchCounter].embed_url +
-                            ">" + "</iframe>");
+                        $("#gallery").append("<iframe id=" + searchCounter +
+                            " class=\"gallery_images col-xs-12 col-sm-3\" src=" +
+                            data.data[searchCounter].embed_url + ">" + "</iframe>");
 
                         console.log(data.data[searchCounter].embed_url, "what is data i embed url");
                     }
@@ -122,6 +124,7 @@
                     newSearchState = true;
                 })
                 .fail(function () {
+                    $("#gallery").append("Error!");
                     console.log("error");
                 })
                 .always(function () {
