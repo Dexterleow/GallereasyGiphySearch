@@ -1,0 +1,11 @@
+.gallery_images_container {
+  position: relative;
+}
+
+#heart_icon_image {
+  width: 50px;
+  position: absolute;
+  z-index: 10;
+  margin-top: 95px;
+  margin-left: -55px;
+} 

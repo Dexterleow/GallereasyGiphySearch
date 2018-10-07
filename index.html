@@ -20,9 +20,8 @@
 </head>
 
 <body>
-
     <div class="container">
-        <h1 class="text-center">GallereasyGiphySearch</h1>
+        <h1 class="gallereasy_title text-center">GallereasyGiphySearch</h1>
 
         <!-- Search form -->
         <div class="row active-search">
@@ -78,19 +77,12 @@
                 "&api_key=EL0x22eZIsaBOefGty0lhD4CLRXzPWjA&limit=" + searchLimit;
 
             var jqxhr = $.get(searchGiphy, function (data) {
-                    $("#gallery").append("Loading ...");
                     console.log("success");
                 })
                 .done(function (data) {
-                    $("#gallery").empty();
-                    // console.log(searchCounter, "search counter");
-                    // console.log(searchLimit, "search Limit");
-                    // console.log(data, "data");
-                    
+
                     // need to do a for loop and append the data
                     for (searchCounter; searchCounter < searchLimit; searchCounter++) {
-                        console.log(searchCounter, "searchCounter value inside the for loop");
-                        console.log(searchLimit, "searchLimit value inside the for loop");
 
                         if (typeof data.data[searchCounter] == 'undefined') {
                             if (searchCounter === 0) {
@@ -98,15 +90,16 @@
                             } else {
                                 $("#gallery").append("No More Results");
                             }
-                            console.log("no more results");
+                            // console.log("no more results");
                             break;
                         }
 
-                        $("#gallery").append("<iframe id=" + searchCounter +
+                        $("#gallery").append("<div" + " class=\"gallery_images_container\" " + ">" + "<iframe id=" + searchCounter +
                             " class=\"gallery_images col-xs-12 col-sm-3\" src=" +
-                            data.data[searchCounter].embed_url + ">" + "</iframe>");
+                            data.data[searchCounter].embed_url + ">" + "</iframe>" + "</div>");
 
-                        console.log(data.data[searchCounter].embed_url, "what is data i embed url");
+                        // console.log(data.data[searchCounter].embed_url, "what is data i embed url");
+                        // + "<div" + " class=\"gallery_images_heart\" " + ">" + "</div>" +
                     }
 
                     // append fetch more button
@@ -134,6 +127,14 @@
 
             // Set another completion function for the request above
             jqxhr.always(function () {
+
+                $('.gallery_images').hover(function () {
+                    $(this).after(' <img src="images/heart_icon.jpg" id="heart_icon_image" />');
+                }, function () {
+                    $('#heart_icon_image').remove();
+                });
+
+                console.log("hoverrr");
                 console.log("second finished");
             });
         }
