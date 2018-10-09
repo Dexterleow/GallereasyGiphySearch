@@ -35,7 +35,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">Search</a></li>
+                        <li><a href="index.html">Search</a></li>
                         <li><a id="user_favourite_images" href="user_favourite_images.html">Favourites</a></li>
                     </ul>
                 </div>
@@ -53,12 +53,13 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="main.js" type="text/javascript"></script>
         <script>
-            
             var favouriteImagesArray = sessionStorage.getItem('favouriteImagesArray');
 
             if (favouriteImagesArray) {
 
                 favouriteImagesArray = favouriteImagesArray.split(',');
+                favouriteImagesArray = favouriteImagesArray.filter(onlyUnique);
+
                 // need to use unique filter
 
                 for (i = 0; i < favouriteImagesArray.length; i++) {
@@ -72,6 +73,10 @@
                     console.log("for loop rendering fav images");
                     sessionStorage.clear();
                 }
+            }
+
+            function onlyUnique(value, index, self) {
+                return self.indexOf(value) === index;
             }
         </script>
 </body>
