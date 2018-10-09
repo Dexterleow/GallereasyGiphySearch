@@ -77,7 +77,7 @@ function search_Giphy_results() {
 
     // Set another completion function for the request above
     jqxhr.always(function () {
-        
+
         console.log("second finished");
     });
 }
@@ -87,7 +87,7 @@ function fetchMoreImages() {
     search_Giphy_results();
 }
 
-function test(value) {
+function test() {
 
     var thisX = $(event.target).closest('.gallery_images').prevObject[0];
     $(thisX).after(' <img src="images/heart_icon.jpg" id="heart_icon_image" />');
@@ -100,26 +100,3 @@ function test(value) {
     console.log(favouriteImages);
     console.log("hellobye")
 }
-
-// $(window).load(function () {
-
-//     console.log("windowload is working ");
-
-//     $('body').on("click", ".gallery_images", function (event) {
-//         event.preventDefault();
-//         // e.preventDefault();
-//         alert("success");
-
-//         $(this).after(' <img src="images/heart_icon.jpg" id="heart_icon_image" />');
-
-//         $(this).attr("src", function (index, attr) {
-//             favouriteImages.push(" " + $(this).attr("src") + " ");
-//             console.log($(this).attr("src"));
-//             console.log(favouriteImages);
-//             sessionStorage.setItem('favouriteImagesArray', favouriteImages);
-//         });
-
-//     }, function () {
-//         $('#heart_icon_image').remove();
-//     });
-// });
