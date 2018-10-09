@@ -34,6 +34,10 @@ function search_Giphy_results() {
         })
         .done(function (data) {
 
+
+            console.log(data, "what is data");
+
+            
             // need to do a for loop and append the data
             for (searchCounter; searchCounter < searchLimit; searchCounter++) {
 
@@ -46,10 +50,10 @@ function search_Giphy_results() {
                     break;
                 }
 
-                $("#gallery").append("<div" + " class=\"gallery_images_container\" " + ">" + "<iframe id=" +
+                $("#gallery").append("<div" + " class=\"gallery_images_container\" " + ">" + "<img id=" +
                     searchCounter +
                     " class=\"gallery_images col-xs-12 col-sm-3\" src=" +
-                    data.data[searchCounter].embed_url + ">" + "</iframe>" + "</div>");
+                    data.data[searchCounter].images.downsized.url + ">" + "</img>" + "</div>");
             }
 
             // append fetch more button
@@ -109,3 +113,4 @@ function fetchMoreImages() {
     newSearchState = false;
     search_Giphy_results();
 }
+

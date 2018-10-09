@@ -55,7 +55,7 @@
         <script>
             var favouriteImagesArray = sessionStorage.getItem('favouriteImagesArray');
 
-            if (favouriteImagesArray) {
+            if (favouriteImagesArray && favouriteImagesArray.length > 1) {
 
                 favouriteImagesArray = favouriteImagesArray.split(',');
                 favouriteImagesArray = favouriteImagesArray.filter(onlyUnique);
@@ -65,10 +65,10 @@
                 for (i = 0; i < favouriteImagesArray.length; i++) {
                     $("#gallery_favouriteImages").append("<div" +
                         " class=\"gallery_images_container_favouriteImages\" " + ">" +
-                        "<iframe id=" +
+                        "<img id=" +
                         i +
                         " class=\"gallery_images_favouriteImages col-xs-12 col-sm-3\" src=" +
-                        favouriteImagesArray[i] + ">" + "</iframe>" + "</div>");
+                        favouriteImagesArray[i] + ">" + "</img>" + "</div>");
 
                     console.log("for loop rendering fav images");
                     sessionStorage.clear();

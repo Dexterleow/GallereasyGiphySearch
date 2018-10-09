@@ -14,3 +14,11 @@
   z-index: -2;
  }
   */
+
+  .gallery_images {
+    /* pointer-events: none;
+    cursor: default;
+    text-decoration: none; */
+    display:block;
+    /* z-index: -2; */
+  }
