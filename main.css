@@ -6,19 +6,12 @@
   width: 50px;
   position: absolute;
   z-index: 10;
-  margin-top: 95px;
-  margin-left: -55px;
-} 
+  /* margin-top: 95px;
+  margin-left: -55px; */
+}
 
-/* .gallery_images { 
-  z-index: -2;
- }
-  */
-
-  .gallery_images {
-    /* pointer-events: none;
-    cursor: default;
-    text-decoration: none; */
-    display:block;
-    /* z-index: -2; */
-  }
+.gallery_images, .gallery_images_favouriteImages {
+  display: block;
+  height:300px;
+  object-fit: cover;
+}
