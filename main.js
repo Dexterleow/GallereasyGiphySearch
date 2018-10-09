@@ -34,10 +34,6 @@ function search_Giphy_results() {
         })
         .done(function (data) {
 
-
-            console.log(data, "what is data");
-
-            
             // need to do a for loop and append the data
             for (searchCounter; searchCounter < searchLimit; searchCounter++) {
 
@@ -52,7 +48,7 @@ function search_Giphy_results() {
 
                 $("#gallery").append("<div" + " class=\"gallery_images_container col-xs-12 col-sm-3\" " + ">" + "<img id=" +
                     searchCounter +
-                    " class=\"gallery_images col-xs-12\" src=" +
+                    " class=\"gallery_images col-xs-12\" onclick='test(\"test\")' src=" +
                     data.data[searchCounter].images.downsized.url + ">" + "</img>" + "</div>");
             }
 
@@ -81,30 +77,7 @@ function search_Giphy_results() {
 
     // Set another completion function for the request above
     jqxhr.always(function () {
-
-        $('.gallery_images').hover(function () {
-            $(this).after(' <img src="images/heart_icon.jpg" id="heart_icon_image" />');
-
-            $(this).attr("src", function (index, attr) {
-                favouriteImages.push(" " + $(this).attr("src") + " ");
-                console.log($(this).attr("src"));
-                console.log(favouriteImages);
-                sessionStorage.setItem('favouriteImagesArray', favouriteImages);
-            });
-
-        }, function () {
-            // $('#heart_icon_image').remove();
-        });
-
-        // $('.gallery_images').click(function () {
-        //     e.stopPropagation();
-        //     event.preventDefault();
-        //     $(this).attr("src", function (index, attr) {
-        //         favouriteImages.push($(this).attr("src"));
-        //         console.log($(this).attr("src"));
-        //     });
-        // });
-
+        
         console.log("second finished");
     });
 }
@@ -114,3 +87,39 @@ function fetchMoreImages() {
     search_Giphy_results();
 }
 
+function test(value) {
+
+    var thisX = $(event.target).closest('.gallery_images').prevObject[0];
+    $(thisX).after(' <img src="images/heart_icon.jpg" id="heart_icon_image" />');
+
+    console.log(thisX.src);
+
+    favouriteImages.push(thisX.src);
+    sessionStorage.setItem('favouriteImagesArray', favouriteImages);
+
+    console.log(favouriteImages);
+    console.log("hellobye")
+}
+
+// $(window).load(function () {
+
+//     console.log("windowload is working ");
+
+//     $('body').on("click", ".gallery_images", function (event) {
+//         event.preventDefault();
+//         // e.preventDefault();
+//         alert("success");
+
+//         $(this).after(' <img src="images/heart_icon.jpg" id="heart_icon_image" />');
+
+//         $(this).attr("src", function (index, attr) {
+//             favouriteImages.push(" " + $(this).attr("src") + " ");
+//             console.log($(this).attr("src"));
+//             console.log(favouriteImages);
+//             sessionStorage.setItem('favouriteImagesArray', favouriteImages);
+//         });
+
+//     }, function () {
+//         $('#heart_icon_image').remove();
+//     });
+// });
