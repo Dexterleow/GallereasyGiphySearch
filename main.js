@@ -50,9 +50,9 @@ function search_Giphy_results() {
                     break;
                 }
 
-                $("#gallery").append("<div" + " class=\"gallery_images_container\" " + ">" + "<img id=" +
+                $("#gallery").append("<div" + " class=\"gallery_images_container col-xs-12 col-sm-3\" " + ">" + "<img id=" +
                     searchCounter +
-                    " class=\"gallery_images col-xs-12 col-sm-3\" src=" +
+                    " class=\"gallery_images col-xs-12\" src=" +
                     data.data[searchCounter].images.downsized.url + ">" + "</img>" + "</div>");
             }
 
@@ -93,7 +93,7 @@ function search_Giphy_results() {
             });
 
         }, function () {
-            $('#heart_icon_image').remove();
+            // $('#heart_icon_image').remove();
         });
 
         // $('.gallery_images').click(function () {
