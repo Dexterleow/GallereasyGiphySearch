@@ -7,6 +7,7 @@ var searchGiphy = "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YO
 var newSearchState = true;
 var fetchMoreButton = true;
 var favouriteImages = [];
+var loadingMessage = "Loading ...";
 
 $('#search_Giphy').on('keydown', function (e) {
     // only trigger search when user press down enter
@@ -33,7 +34,6 @@ function search_Giphy_results() {
             console.log("success");
         })
         .done(function (data) {
-
             // need to do a for loop and append the data
             for (searchCounter; searchCounter < searchLimit; searchCounter++) {
 
@@ -58,6 +58,7 @@ function search_Giphy_results() {
                 var r = $('<input/>').attr({
                     type: "button",
                     id: "field",
+                    class: "btn btn-primary",
                     value: "Fetch More",
                     onclick: "fetchMoreImages()"
                 });
@@ -103,7 +104,12 @@ function userLikedPhotos() {
     console.log(thisX.src);
 
     favouriteImages.push(thisX.src);
-    sessionStorage.setItem('favouriteImagesArray', favouriteImages);
+    favouriteImages = favouriteImages.filter(onlyUnique);
 
+    sessionStorage.setItem('favouriteImagesArray', favouriteImages);
     console.log(favouriteImages);
+}
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
 }

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title Page</title>
+    <title>GallereasyGiphySearch</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -13,10 +13,11 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+                        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+                        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+                    <![endif]-->
     <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -59,9 +60,7 @@
             if (favouriteImagesArray && favouriteImagesArray.length > 1) {
 
                 favouriteImagesArray = favouriteImagesArray.split(',');
-                favouriteImagesArray = favouriteImagesArray.filter(onlyUnique);
-
-                // need to use unique filter
+                // favouriteImagesArray = favouriteImagesArray.filter(onlyUnique);
 
                 for (i = 0; i < favouriteImagesArray.length; i++) {
                     $("#gallery_favouriteImages").append("<div" +
@@ -74,10 +73,6 @@
                     // console.log("for loop rendering fav images");
                     // sessionStorage.clear();
                 }
-            }
-
-            function onlyUnique(value, index, self) {
-                return self.indexOf(value) === index;
             }
         </script>
 </body>
