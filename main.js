@@ -48,7 +48,7 @@ function search_Giphy_results() {
 
                 $("#gallery").append("<div" + " class=\"gallery_images_container col-xs-12 col-sm-3\" " + ">" + "<img id=" +
                     searchCounter +
-                    " class=\"gallery_images col-xs-12\" onclick='test(\"test\")' src=" +
+                    " class=\"gallery_images col-xs-12\" onclick='userLikedPhotos()' src=" +
                     data.data[searchCounter].images.downsized.url + ">" + "</img>" + "</div>");
             }
 
@@ -78,6 +78,14 @@ function search_Giphy_results() {
     // Set another completion function for the request above
     jqxhr.always(function () {
 
+        // add function hover over
+        $('.gallery_images').hover(function () {
+            $(this).after(' <img src="images/heart_icon.jpg" id="heart_icon_image" class="hover_over_heart"/>');
+            // console.log("hey there");
+        }, function () {
+            $('#heart_icon_image').remove();
+        });
+
         console.log("second finished");
     });
 }
@@ -87,7 +95,7 @@ function fetchMoreImages() {
     search_Giphy_results();
 }
 
-function test() {
+function userLikedPhotos() {
 
     var thisX = $(event.target).closest('.gallery_images').prevObject[0];
     $(thisX).after(' <img src="images/heart_icon.jpg" id="heart_icon_image" />');
@@ -98,5 +106,4 @@ function test() {
     sessionStorage.setItem('favouriteImagesArray', favouriteImages);
 
     console.log(favouriteImages);
-    console.log("hellobye")
 }
